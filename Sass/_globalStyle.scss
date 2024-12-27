@@ -1,0 +1,241 @@
+// import file to font app
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+// import file to media cwery
+@import "_breakpoints.scss";
+
+// import create Custom-Scrollbars-&-Selection-color
+@import "_Custom-Scrollbars-&-Selection-color.scss";
+
+// import containerScreen
+@import "_containerScreen.scss";
+
+/*! start variables*/
+
+$colorNormal: #ffffff;
+$colorHeading: #48556a;
+$colorSubheading: #8a8a8a;
+
+$Accent: #fbd784;
+$AccentDark: #5c4103;
+
+$Bg: #0b1d26;
+
+$gradient-top: linear-gradient(135deg, rgb(9, 23, 30), rgba(0, 0, 0, 0) 87%);
+$gradient-bottom: linear-gradient(180deg, rgba(11, 29, 38, 0), #0b1d26 20%);
+$gradient-bottom-small: linear-gradient(
+  180deg,
+  rgba(11, 29, 38, 0),
+  #0b1d26 5%
+);
+
+$font-Playfair: "Playfair Display", serif;
+$font-Roboto: "Roboto", sans-serif;
+$tr: 600ms;
+/*! end variables*/
+/*! start Global Rules*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  // line-height: 1.15;
+  [data-pos="fade-left"],
+  [data-pos="fade-right"],
+  [data-pos="fade-up"] {
+    transition-duration: 0.8s;
+    pointer-events: auto;
+    transition-property: opacity, transform, -webkit-transform;
+  }
+  [data-pos="fade-right"] {
+    -webkit-transform: translate3d(-100px, 0, 0);
+    transform: translate3d(-100px, 0, 0);
+  }
+  [data-pos="fade-left"] {
+    -webkit-transform: translate3d(100px, 0, 0);
+    transform: translate3d(100px, 0, 0);
+  }
+  [data-pos="fade-up"] {
+    -webkit-transform: translate3d(0, 100px, 0) scale(0.6);
+    transform: translate3d(0, 100px, 0) scale(0.6);
+  }
+  [data-pos-duration="2000"] {
+    transition-duration: 2s !important;
+  }
+  [data-pos-duration="3000"] {
+    transition-duration: 3s !important;
+  }
+  [data-pos="fade-right"].active,
+  [data-pos="fade-left"].active,
+  [data-pos="fade-up"].active {
+    -webkit-transform: translate3d(0px, 0, 0);
+    transform: translate3d(0px, 0, 0);
+  }
+}
+
+.section-show {
+  scale: 0.9;
+  opacity: 0;
+  transition: 0.8s;
+  transition-timing-function: cubic-bezier(0.5, 0, 0, 1);
+}
+
+.section-show.active {
+  opacity: 1;
+  top: 0;
+  scale: 1;
+}
+
+body {
+  font: {
+    family: $font-Playfair;
+    family: $font-Roboto;
+    size: 16px;
+  }
+  background-color: $Bg;
+}
+ul,
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: $colorNormal;
+  display: inline-block;
+  font: {
+    family: $font-Roboto;
+  }
+  &:hover {
+    color: $Accent;
+  }
+}
+
+.tagline-line {
+  color: $Accent;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font: {
+    family: $font-Roboto;
+    weight: 700;
+    size: 1rem;
+  }
+  &::before {
+    display: inline-block;
+    content: "";
+    background-color: $Accent;
+    width: 80px;
+    height: 2px;
+    margin: 0 20px 8px 0;
+  }
+  @include media("<=680px") {
+    font-size: 0.875rem;
+    letter-spacing: 4px;
+    &::before {
+      margin: 0 20px 4px 0;
+      width: 60px;
+    }
+  }
+}
+/*! end Global Rules*/
+/*! start loader */
+.loader {
+  background-color: $Bg;
+  display: block;
+  position: fixed;
+  top: 0rem;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  animation: removed 1s cubic-bezier(0, 0, 1, 1) 4s forwards;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 3.75rem;
+    position: relative;
+    top: 40%;
+    img {
+      width: 12.5rem;
+      animation: pulse; /* referring directly to the animation's @keyframe declaration */
+      animation-duration: 1s; /* don't forget to set a duration! */
+      animation-iteration-count: infinite;
+    }
+    .balls {
+      width: 5em;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+      div {
+        width: 1.125em;
+        height: 1.125em;
+        border-radius: 50%;
+        background-color: $Accent;
+        transform: translateY(-100%);
+        animation: wave 0.8s ease-in-out alternate infinite;
+        &:nth-of-type(1) {
+          animation-delay: -0.4s;
+        }
+        &:nth-of-type(2) {
+          animation-delay: -0.2s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes removed {
+  from {
+    display: block;
+    opacity: 1;
+    transform: translateY(0%);
+    visibility: visible;
+  }
+  to {
+    display: none;
+    opacity: 0;
+    transform: translateY(100%);
+    visibility: hidden;
+  }
+}
+
+@keyframes wave {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+/*! end loader */
+/*! start button back to top  */
+
+.up {
+  position: fixed;
+  bottom: 40px;
+  background-color: $Accent;
+  color: $colorNormal;
+  font-size: 0.875rem;
+  right: -40px;
+  padding: 1.125rem 1.25rem;
+  border-radius: 50%;
+  font-family: $font-Roboto;
+  cursor: pointer;
+  transition: $tr;
+  display: none;
+}
+
+.up.show {
+  right: 40px;
+  display: block;
+}
+/*! end button back to top  */

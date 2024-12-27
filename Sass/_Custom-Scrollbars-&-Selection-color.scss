@@ -1,0 +1,41 @@
+$firstColor: #fbd784;
+$secondColor: #607d8b;
+$NormalColor: #ffffff;
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  width: 10px;
+  background-color: $secondColor;
+  border-left: 0 solid $NormalColor;
+  border-right: 0 solid $NormalColor;
+  margin-block: 3px;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $firstColor;
+  width: 15% !important;
+  height: 15% !important;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar:hover {
+  cursor: pointer;
+}
+
+::-moz-selection {
+  /* code for firefox */
+  color: $NormalColor;
+  background-color: $firstColor;
+}
+
+::selection {
+  /* code for firefox */
+  color: $NormalColor;
+  background-color: $firstColor;
+}
+
+/* end variables */

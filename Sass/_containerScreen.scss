@@ -1,0 +1,23 @@
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  /*small*/
+  @include media(">576px") {
+    width: 550px;
+  }
+  /* tablet */
+  @include media(">=tablet") {
+    width: 750px;
+  }
+  /* Medium */
+  @include media(">=992px") {
+    width: 970px;
+  }
+  /* desktop  */
+  @include media(">=1300px") {
+    width: 1170px;
+  }
+}
